@@ -1,0 +1,83 @@
+.steps {
+  width: 100%;
+  height: 42px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-bottom: 1px #F0F0F0 solid;
+  padding-left: 27px;
+
+  .ant-steps-item-process .ant-steps-item-icon {
+    background: #0081CC;
+    border-color: #0081CC;
+  }
+
+  .ant-steps-item-finish .ant-steps-item-icon {
+    border-color: #0081CC;
+  }
+
+  .ant-steps-item-wait .ant-steps-item-icon {
+    border-color: #D9D9D9;
+  }
+
+  .ant-steps-horizontal:not(.ant-steps-label-vertical) .ant-steps-item{
+    margin-right: 10px;
+    white-space: nowrap;
+  }
+
+  .ant-steps-item {
+    display: flex;
+    align-items: center;
+    flex: none;
+    padding-right: 30px;
+  }
+
+  .ant-steps-item:nth-last-child(1) {
+  }
+
+  .ant-steps-item-icon {
+    border: 1px solid;
+    width: 20px;
+    height: 20px;
+    line-height: 20px;
+    text-align: center;
+    border-radius: 50%;
+    font-size: 14px;
+    margin-right: 8px;
+  }
+
+  .ant-steps-icon {
+    display: block;
+    width: 20px;
+    height: 20px;
+    line-height: 20px;
+    text-align: center;
+    top: -1px;
+    left: -1px;
+  }
+
+  .ant-steps-item-title {
+    font-size: 14px;
+    color: #2E2E2E;
+    display: inline-block;
+    padding-right: 10px;
+    position: relative;
+    line-height: 32px;
+  }
+
+  .ant-steps-item-title:after {
+    width: 30px;
+  }
+
+  .ant-steps-item-finish > .ant-steps-item-content > .ant-steps-item-title:after {
+    background-color: #108EE9;
+  }
+
+  .ant-steps-item-process > .ant-steps-item-content > .ant-steps-item-title:after {
+    background-color: #D9D9D9;
+  }
+
+  .ant-steps-item-wait > .ant-steps-item-content > .ant-steps-item-title:after {
+    background-color: #D9D9D9;
+  }
+}

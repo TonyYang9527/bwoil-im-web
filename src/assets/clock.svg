@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="12px" height="12px" viewBox="0 0 12 12" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 49 (51002) - http://www.bohemiancoding.com/sketch -->
+    <title>clock</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Flow" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="IM-Chartering---Shipowner" transform="translate(-322.000000, -284.000000)" fill-rule="nonzero">
+            <g id="chat" transform="translate(265.000000, 17.000000)">
+                <g id="You" transform="translate(17.000000, 259.000000)">
+                    <g id="clock" transform="translate(40.000000, 8.000000)">
+                        <g id="clock-circle" fill="#FFC226">
+                            <path d="M6,0 C2.6859375,0 0,2.6859375 0,6 C0,9.3140625 2.6859375,12 6,12 C9.3140625,12 12,9.3140625 12,6 C12,2.6859375 9.3140625,0 6,0 Z" id="Shape"></path>
+                        </g>
+                        <g id="clock-circle-copy" transform="translate(5.000000, 3.000000)" fill="#FFFFFF">
+                            <path d="M3.01171875,4.078125 L0.84375,4.078125 C0.37734375,4.078125 0,3.70078125 0,3.234375 L0,0.421875 C0,0.188671875 0.188671875,0 0.421875,0 C0.655078125,0 0.84375,0.188671875 0.84375,0.421875 L0.84375,3.234375 L3.01171875,3.234375 C3.24492187,3.234375 3.43359375,3.42304688 3.43359375,3.65625 C3.43359375,3.88945312 3.24492187,4.078125 3.01171875,4.078125 Z" id="Shape"></path>
+                        </g>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="24px" height="32px" viewBox="0 0 24 32" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 49 (51002) - http://www.bohemiancoding.com/sketch -->
+    <title>docs</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Flow" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="IM-Chartering---Shipowner" transform="translate(-328.000000, -290.000000)" fill-rule="nonzero">
+            <g id="chat" transform="translate(265.000000, 17.000000)">
+                <g id="You" transform="translate(17.000000, 259.000000)">
+                    <g id="chat-content" transform="translate(32.000000, 0.000000)">
+                        <g id="docs" transform="translate(14.000000, 14.000000)">
+                            <path d="M23.1111111,8.65108808 L23.1111111,29.550466 C23.1111111,30.674395 22.1900895,31.5851852 21.0554841,31.5851852 L2.05562702,31.5851852 C0.920149086,31.5851852 0,30.674395 0,29.550466 L0,2.03471914 C-6.2323834e-05,0.910790205 0.920086762,0 2.05562702,0 L14.3711282,0 L23.1111111,8.65108808 Z" id="Shape" fill="#518EF8"></path>
+                            <g id="lines" transform="translate(5.392593, 16.177778)" fill="#FFFFFF">
+                                <rect id="Rectangle-path" x="0.0109473684" y="0.00331779141" width="11.5328094" height="1.2946145"></rect>
+                                <rect id="Rectangle-path" x="0.0109473684" y="2.89458868" width="11.5328094" height="1.2946145"></rect>
+                                <rect id="Rectangle-path" x="0.0109473684" y="5.78592102" width="11.5328094" height="1.2946145"></rect>
+                                <rect id="Rectangle-path" x="0.0109473684" y="8.67725335" width="8.2017076" height="1.2946145"></rect>
+                            </g>
+                            <polygon id="Shape" fill="#3A5BBC" points="15.4074074 8.6923057 23.1111111 11.5555556 23.1111111 8.86717336 18.743355 7.7037037"></polygon>
+                            <path d="M23.1111111,8.47407407 L16.6301228,8.47407407 C15.5291307,8.47407407 14.637037,7.58191998 14.637037,6.48098829 L14.637037,0 L23.1111111,8.47407407 Z" id="Shape" fill="#ACD1FC"></path>
+                        </g>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

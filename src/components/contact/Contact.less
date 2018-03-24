@@ -1,0 +1,53 @@
+.contact {
+  width: 250px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  font-family: Roboto-Regular;
+
+  .contact-icon {
+    position: relative;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    margin: 0 8px 0 10px;
+
+    .ant-avatar-image {
+      border-radius: 50%;
+    }
+
+    .contact-point {
+      position: absolute;
+      left: 2px;
+      top: 2px;
+      width: 8px;
+      height: 8px;
+      background: rgba(92, 208, 104, 1);
+      border-radius: 50%;
+    }
+  }
+
+  .contact-name {
+    display: block;
+    height: 22px;
+    max-width: 164px;
+    line-height: 22px;
+    font-size: 14px;
+    color: #2E2E2E;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+  }
+}
+
+.contact:hover, .contact:active {
+  background: #EBEBEB;
+}
+
+.ant-avatar.ant-avatar-icon{
+  width: 32px; 
+  height: 32px ;
+}
