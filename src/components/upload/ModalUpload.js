@@ -1,11 +1,11 @@
 import React from 'react';
 import {observer} from "mobx-react";
-import {Icon, Button,Upload,Modal} from 'antd';
+import {Icon,Upload,Modal} from 'antd';
 import {observable, action} from 'mobx';
 
-
 const state = observable({
-    previewVisible: false,
+    modalShow:false ,
+    modalpreviewShow: false,
     fileList: [{
         uid: -1,
         name: 'xxx.png',
@@ -19,22 +19,30 @@ const state = observable({
 const actions = {
 
     showModal: action(e => {
-        state.previewVisible =true ;
+        state.modalShow =true ;
     }),
     handleCancel: action(e => {
-        state.previewVisible =false ;
+        state.modalShow =false ;
     }),
-    handleChange : action( ({flist}) => {
-
-        console.log(JSON.stringify(flist)) ;
+    handlePreviewCancel: action(e => {
+        state.modalpreviewShow = false;
+    }),
+    handleChange: action((info) => {
+        console.log(JSON.stringify(info.fileList)) ;
        // state.fileList =flist ;
        // state.length = state.fileList.length ;
     }),
-
     handlePreview : action((file) => {
         state.previewImage=file.url || file.thumbUrl;
-        state.previewVisible= true;
-    })
+        state.modalpreviewShow= true;
+    }),
+    handleRemove: action((file) => {
+        const index = state.fileList.indexOf(file);
+        const newFileList = state.fileList.slice();
+        newFileList.splice(index, 1);
+        state.fileList= newFileList;
+    }),
+
 };
 
 const ModalUpload = observer(({store,action}) => {
@@ -46,15 +54,28 @@ const ModalUpload = observer(({store,action}) => {
       );
 
     return (
-        <Modal visible={state.previewVisible} footer={null} onCancel={action.handleCancel}>
+        <Modal
+          title="Image"  
+          visible={state.modalShow} 
+          onCancel={action.handleCancel}
+          footer={<div className="ant-upload-text">Upload Completed!!</div>}
+          destroyOnClose={true}
+          maskClosable={false}
+          >
         <Upload 
-           action="https://github.com/TonyYang9527/bwoil-im-web/tree/master/src/"
+           action="//jsonplaceholder.typicode.com/posts/"
            listType="picture-card"
            fileList={state.fileList}
            onPreview={action.handlePreview}
-           onChange={action.handleChange} >
-          { state.fileList.length >= 3? null : uploadButton}
+           onChange={action.handleChange}
+           onRemove={action.handleRemove}
+           multiple={true}
+          >
+          { state.fileList.length >= 6? null : uploadButton}
         </Upload>
+            <Modal visible={state.modalpreviewShow} footer={null} onCancel={action.handlePreviewCancel}>
+                <img alt="example" style={{ width: '100%' }} src={state.previewImage} />
+         </Modal>
       </Modal>
     );
   }

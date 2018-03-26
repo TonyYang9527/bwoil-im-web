@@ -2,7 +2,7 @@ import React from 'react';
 import {observer} from "mobx-react";
 import {Input, Icon, Button} from 'antd';
 import './TextBox.less';
-
+import { ModalUpload, state, actions } from '../upload/ModalUpload' ;
 const TextArea = Input.TextArea;
 
 const TextBox = observer(({store}) => {
@@ -17,7 +17,8 @@ const TextBox = observer(({store}) => {
 
             <div className='send-tools'>
                             <span className='icon'>
-                                <Icon type='picture' />
+                    <ModalUpload  store={state} action={actions} />
+                    <Icon type='picture' onClick={actions.showModal} />
                                 <Icon type='paper-clip'/>
                             </span>
                 <Button type='primary' onClick={store.onPressEnter}>Send</Button>
