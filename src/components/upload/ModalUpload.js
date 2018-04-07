@@ -2,22 +2,18 @@ import React from 'react';
 import {observer} from "mobx-react";
 import { Icon, Upload, Modal, message} from 'antd';
 import {observable, action} from 'mobx';
+import  './upload.css';
 
 const state = observable({
     modalShow:false ,
     modalpreviewShow: false,
-    defaultFileList: [{
-        uid: -1,
-        name: 'xxx.png',
-        status: 'done',
-        url: 'https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png',
-      }] ,
-    length : 0 ,
+    disabled :false ,
+    fileList: [] ,
     previewImage: '',
+    maxSize :5,
 });
 
 const actions = {
-
     showModal: action(e => {
         state.modalShow =true ;
     }),
@@ -28,17 +24,20 @@ const actions = {
         state.modalpreviewShow = false;
     }),
     handleChange: action((info) => {
-        console.log(JSON.stringify(info.file)) ;
-        state.defaultFileList = info.fileList ;
+
+        if(info.fileList.length >=state.maxSize){
+            state.disabled=true;
+         }
+         if(info.fileList.length >state.maxSize){
+            info.fileList.pop();
+         }
+        state.fileList =info.fileList;
         if (info.file.status === 'uploading') {
-            console.log(info.file);
         }
         if (info.file.status === 'done') {
             message.success(`${info.file.name} file uploaded successfully`);
-            console.log(info.file);
         } else if (info.file.status === 'error') {
             message.error(`${info.file.name} file upload failed.`);
-            console.log(info.file);
         }
     }),
     handlePreview : action((file) => {
@@ -46,44 +45,42 @@ const actions = {
         state.modalpreviewShow= true;
     }),
     handleRemove: action((file) => {
-        const index = state.defaultFileList.indexOf(file);
-        const newFileList = state.fileList.slice();
-        newFileList.splice(index, 1);
-        state.defaultFileList= newFileList;
+        state.fileList.pop(file) ;
+        if(state.fileList.length <= state.maxSize && state.disabled ){
+            state.disabled=false;
+        }
     }),
 
 };
 
 const ModalUpload = observer(({store,action}) => {
-    const uploadButton = (
-        <div>
-          <Icon type="plus" />
-          <div className="ant-upload-text">Upload</div>
-        </div>
-      );
-
     return (
         <Modal
-          title="Image"  
+          title="upload"  
           visible={state.modalShow} 
           onCancel={action.handleCancel}
-          footer={<div className="ant-upload-text">Upload Completed!!</div>}
+          footer={null}
           destroyOnClose={true}
           maskClosable={false}
+          height ='auto'
           >
         <Upload 
            action="//jsonplaceholder.typicode.com/posts/"
            listType="picture-card"
-           defaultFileList={state.defaultFileList}
+           defaultFileList={state.fileList}
            onPreview={action.handlePreview}
            onChange={action.handleChange}
            onRemove={action.handleRemove}
-           multiple={false}
+           multiple={true}
+           disabled ={state.disabled}
           >
-                {state.defaultFileList.length >= 6? null : uploadButton}
+          <div>
+          <Icon type="plus" />
+          <div className="ant-upload-text">Upload</div>
+          </div>
         </Upload>
-            <Modal visible={state.modalpreviewShow} footer={null} onCancel={action.handlePreviewCancel}>
-                <img alt="example" style={{ width: '100%' }} src={state.previewImage} />
+        <Modal visible={state.modalpreviewShow} footer={null} onCancel={action.handlePreviewCancel}>
+            <img alt="example" style={{ width: '100%' }} src={state.previewImage} />
          </Modal>
       </Modal>
     );

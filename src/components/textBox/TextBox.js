@@ -16,11 +16,11 @@ const TextBox = observer(({store}) => {
             </div>
 
             <div className='send-tools'>
-                            <span className='icon'>
-                    <ModalUpload  store={state} action={actions} />
-                    <Icon type='picture' onClick={actions.showModal} />
-                                <Icon type='paper-clip'/>
-                            </span>
+                <span className='icon'>
+                     <ModalUpload  store={state} action={actions} />
+                     <Icon type='picture' onClick={actions.showModal} />
+                     <Icon type='paper-clip' onClick={actions.showModal}/>
+                </span>
                 <Button type='primary' onClick={store.onPressEnter}>Send</Button>
             </div>
         </div>
