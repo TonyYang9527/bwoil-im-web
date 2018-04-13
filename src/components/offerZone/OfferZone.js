@@ -4,16 +4,18 @@ import {Icon, Button} from 'antd';
 import './OfferZone.less';
 
 const OfferZone = observer(({store}) => {
-        return <div className='sub-tool'>
-             <div>
-                <Button type='primary'>Make Offer</Button>
-                <Button disabled={true}>On Sub</Button>
-                <Button>Lift Sub</Button>
-                <Button>Fail Sub</Button>
-                <Button>Clean Fix</Button>
+        return (
+            <div className='sub-tool'>
+                <div>
+                    <Button type='primary' onClick={store.makeOffer}>Make Offer</Button>
+                    <Button onClick={store.makeOfferConfirmation}>On Sub</Button>
+                    <Button>Lift Sub</Button>
+                    <Button>Fail Sub</Button>
+                    <Button>Clean Fix</Button>
+                </div>
+                <Icon type='info-circle' style={{color: '#B0B0B0', fontSize: 16}}/>
             </div>
-            <Icon type='info-circle'/>
-        </div>
+        )
     }
 );
 

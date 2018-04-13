@@ -3,10 +3,9 @@ import {observer} from 'mobx-react';
 import Search from '../search/Search';
 import TabsView from '../tabsView/TabsView';
 
-import store from '../../stores/SliderStore' ;
 import './SliderContainer.less' ;
 
-const SliderContainer = observer(() => {
+const SliderContainer = observer(({store}) => {
     return (
         <div className="slider">
             <Search store={store}/>

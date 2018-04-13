@@ -27,9 +27,9 @@ export const sessions = [
         name: "Mike Gordon",
         status: "online",
         image: require("../assets/master.jpg"),
-        message: "I miss you dear,call me please. i leave message  to  you.",
+        message: "I miss you dear,call me please. i leave message to you.",
         unread: 98,
-        time: "02:49",
+        time: "02:49"
     },
     {
         id: 101,
@@ -38,7 +38,7 @@ export const sessions = [
         image: require("../assets/guest.jpg"),
         message: "You: Did you receive my messs",
         unread: 100,
-        time: "01:49",
+        time: "01:49"
     },
     {
         id: 102,
@@ -47,7 +47,7 @@ export const sessions = [
         image: require("../assets/guest.jpg"),
         message: "GO BIG or GO HOME!!!",
         unread: 1,
-        time: "00:00",
+        time: "00:00"
     },
     {
         id: 103,
@@ -56,7 +56,7 @@ export const sessions = [
         image: require("../assets/guest.jpg"),
         message: "Let’s have some tea break a rest",
         unread: 67,
-        time: "23 Jan",
+        time: "23 Jan"
     },
     {
         id: 104,
@@ -65,7 +65,7 @@ export const sessions = [
         image: require("../assets/guest.jpg"),
         message: "Who are you?",
         unread: 87,
-        time: "21-Jan",
+        time: "21-Jan"
     },
     {
         id: 105,
@@ -74,7 +74,7 @@ export const sessions = [
         image: require("../assets/guest.jpg"),
         message: "Today is Monday, not my day",
         unread: 7,
-        time: "3 Jan",
+        time: "3 Jan"
     },
     {
         id: 106,
@@ -83,7 +83,7 @@ export const sessions = [
         image: require("../assets/guest.jpg"),
         message: "OMG~ i can’t believe it you",
         unread: 91,
-        time: "1 Jan",
+        time: "1 Jan"
     },
     {
         id: 107,
@@ -92,7 +92,7 @@ export const sessions = [
         image: require("../assets/guest.jpg"),
         message: "Hell YESSSSSSsssssssssss. go head",
         unread: 12,
-        time: "12 Dec",
+        time: "12 Dec"
     },
     {
         id: 108,
@@ -101,7 +101,7 @@ export const sessions = [
         image: require("../assets/master.jpg"),
         message: "I want to change team!!!",
         unread: 0,
-        time: "12 Dec",
+        time: "12 Dec"
     },
     {
         id: 109,
@@ -110,7 +110,7 @@ export const sessions = [
         image: require("../assets/master.jpg"),
         message: "I want to change team!!!",
         unread: 0,
-        time: "12 Dec",
+        time: "12 Dec"
     },
     {
         id: 110,
@@ -119,7 +119,7 @@ export const sessions = [
         image: require("../assets/guest.jpg"),
         message: "I want to change team!!!",
         unread: 0,
-        time: "12 Dec",
+        time: "12 Dec"
     },
     {
         id: 111,
@@ -128,7 +128,7 @@ export const sessions = [
         image: require("../assets/guest.jpg"),
         message: "I want to get back!!!",
         unread: 0,
-        time: "12 Dec",
+        time: "12 Dec"
     },
     {
         id: 112,

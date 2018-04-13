@@ -10,14 +10,13 @@ import Contact from '../contact/Contact';
 const TabPane = Tabs.TabPane;
 
 const TabsView = observer(({store}) => {
+        console.log('TabsView', store.data.sessions);
         return <Tabs activeKey={store.data.activated} onChange={store.actions.onTabChange}>
             <TabPane tab='Message' key='1'>
                 <Scrollbars style={{width: 250, height: 572}}
                             renderThumbVertical={store.verticalBarStyle}
                             renderThumbHorizontal={store.horizontalBarStyle}
-                            autoHide
-                            autoHideTimeout={1000}
-                            autoHideDuration={200}>
+                            thumbSize ={ 56} >
                     {store.data.sessions.map((elem, index) => <Session store={elem} key={index}/>)}
                 </Scrollbars>
             </TabPane>
@@ -25,9 +24,7 @@ const TabsView = observer(({store}) => {
                 <Scrollbars style={{width: 250, height: 572}}
                             renderThumbVertical={store.verticalBarStyle}
                             renderThumbHorizontal={store.horizontalBarStyle}
-                            autoHide
-                            autoHideTimeout={1000}
-                            autoHideDuration={200}>
+                            thumbSize ={ 56} >
                     {store.data.contacts.map((elem, index) => <Contact store={elem} key={index}/>)}
                 </Scrollbars>
             </TabPane>

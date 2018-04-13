@@ -6,22 +6,22 @@ import MessagesBox from '../messagesBox/MessagesBox';
 import OfferZone from '../offerZone/OfferZone';
 import TextBox from '../textBox/TextBox';
 
-import contentStore from '../../stores/ContentStore';
 import './ContentContainer.less';
 
-const ContentContainer = observer(() => {
+const ContentContainer = observer(({store}) => {
     return (
-        <div className='content'>
-            <div className='head'>
-                <span>{contentStore.data.name}</span>
-                <Icon type='user-add'/>
-            </div>
-            <Steps store={contentStore}/>
-            <MessagesBox store={contentStore}/>
-            <OfferZone store={contentStore}/>
-            <TextBox store={contentStore}/>
-        </div>
+        store.data.session ?
+            <div className='content'>
+                <div className='head'>
+                    <span>{store.data.session.name}</span>
+                    <Icon type='user-add' onClick={store.data.session.openAddContact}/>
+                </div>
+                <Steps store={store.data.session}/>
+                <MessagesBox store={store.data.session}/>
+                <OfferZone store={store.data.session}/>
+                <TextBox store={store.data.session}/>
+            </div> : <div className='content'/>
     );
 });
 
-export {ContentContainer} ;
+export {ContentContainer};

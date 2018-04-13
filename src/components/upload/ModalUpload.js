@@ -1,8 +1,7 @@
 import React from 'react';
 import {observer} from "mobx-react";
-import { Icon, Upload, Modal, message} from 'antd';
+import { Icon, Upload, Modal} from 'antd';
 import {observable, action} from 'mobx';
-import  './upload.css';
 
 const state = observable({
     modalShow:false ,
@@ -11,46 +10,68 @@ const state = observable({
     fileList: [] ,
     previewImage: '',
     maxSize :5,
+    accept : '',
 });
 
 const actions = {
-    showModal: action(e => {
+    showModal: action( e => {
         state.modalShow =true ;
+        state.accept =e.target.getAttribute("value");
     }),
     handleCancel: action(e => {
+        //1. close modal 
         state.modalShow =false ;
+        //2.clean up filelist 
+        state.fileList = [] ;
     }),
     handlePreviewCancel: action(e => {
+        // 1. close preview modal .
         state.modalpreviewShow = false;
     }),
     handleChange: action((info) => {
 
         if(info.fileList.length >=state.maxSize){
             state.disabled=true;
-         }
-         if(info.fileList.length >state.maxSize){
-            info.fileList.pop();
-         }
-        state.fileList =info.fileList;
-        if (info.file.status === 'uploading') {
         }
-        if (info.file.status === 'done') {
-            message.success(`${info.file.name} file uploaded successfully`);
-        } else if (info.file.status === 'error') {
-            message.error(`${info.file.name} file upload failed.`);
-        }
+        let fileList = info.fileList;
+        // 1.Limit the number of uploaded maxSize = 5 files
+         fileList = fileList.slice(0,state.maxSize);
+        // 2.read from response and show file link
+        fileList = fileList.map((file) => {
+          if (file.response) {
+            //Component will show file.url as link
+            file.url = file.response.url || file.thumbUrl ;
+          }
+          return file;
+        });
+        // 3. filter successfully uploaded files according to response from server
+        fileList = fileList.filter((file) => {
+          if (file.response) {
+           // return file.response.status === 'done';
+           return file.status === 'done';
+           }
+          return true;
+        });
+        //4. update  state.fileList 
+        state.fileList =fileList;
     }),
-    handlePreview : action((file) => {
+    handlePreview :action((file) => {
         state.previewImage=file.url || file.thumbUrl;
         state.modalpreviewShow= true;
     }),
     handleRemove: action((file) => {
-        state.fileList.pop(file) ;
-        if(state.fileList.length <= state.maxSize && state.disabled ){
-            state.disabled=false;
-        }
-    }),
-
+          //1. find remove file index
+          const index = state.fileList.indexOf(file);
+          //2. clone  fileList & remove file.
+          const list = state.fileList.slice();
+          list.splice(index, 1);
+          //3. renew  fileList
+          state.fileList =list ;
+          //4. enable upload button.
+          if(state.fileList.length <= state.maxSize && state.disabled ){
+             state.disabled=false;
+          }
+    })
 };
 
 const ModalUpload = observer(({store,action}) => {
@@ -62,24 +83,26 @@ const ModalUpload = observer(({store,action}) => {
           footer={null}
           destroyOnClose={true}
           maskClosable={false}
-          height ='auto'
-          >
+          height ='auto'>
+         
         <Upload 
-           action="//jsonplaceholder.typicode.com/posts/"
+           name ="file"
+           action="http://192.168.48.111/api/gateway_simplewebapp/api/simple/file/upload"
            listType="picture-card"
-           defaultFileList={state.fileList}
+           fileList={state.fileList}
            onPreview={action.handlePreview}
            onChange={action.handleChange}
            onRemove={action.handleRemove}
+           showUploadList ={true} 
            multiple={true}
            disabled ={state.disabled}
-          >
-          <div>
-          <Icon type="plus" />
-          <div className="ant-upload-text">Upload</div>
-          </div>
+           accept ={state.accept}>
+           <div>
+           <Icon type="plus" />
+           <div className="ant-upload-text">Upload</div>
+           </div>
         </Upload>
-        <Modal visible={state.modalpreviewShow} footer={null} onCancel={action.handlePreviewCancel}>
+          <Modal visible={state.modalpreviewShow} footer={null} onCancel={action.handlePreviewCancel}>
             <img alt="example" style={{ width: '100%' }} src={state.previewImage} />
          </Modal>
       </Modal>

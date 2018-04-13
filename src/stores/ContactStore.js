@@ -1,39 +1,39 @@
 import {extendObservable, action} from 'mobx';
 
-import globalStore from './GlobalStore';
-import sliderStore from './SliderStore';
-
+import SessionStore from './SessionStore';
+import global from './Global';
 
 function ContactStore() {
     extendObservable(this, {
         id: 0,
         image: '',
         name: '',
-        unread: 0,
-        time: '',
-        messages: [],
-        profiles: [],
-        getFocus: '',
         chooseContact: action.bound(function () {
+            let session = global.data.sessions.find((elem) =>
+                elem.partner.length === 1 && elem.partner[0].id === this.id
+            );
+            console.log('chooseContact', session);
+
+            if (session) {
+                session.chooseSession();
+            } else {
+                session = new SessionStore();
+                session.partner.push(this);
+                session.chooseSession();
+                global.data.sessions.push(session);
+            }
+            global.data.activated = '1';
+        }),
+        addContactToSession: action.bound(function (e) {
             let that = this;
-
-            if (!globalStore.data.contact || globalStore.data.contact.id !== that.id) {
-                that.getFocus = ' focused';
-                if (globalStore.data.contact) {
-                    globalStore.data.contact.getFocus = '';
-                }
-                globalStore.data.contact = that;
-                let index = globalStore.data.session_list.findIndex(function (elem) {
-                    return that.id === elem.id;
-                });
-                if (index === -1) {
-                    globalStore.data.session_list.push(that);
+            if (!e.target.checked) {
+                global.data.session.preAdd = global.data.session.preAdd.filter((elem) => elem.id !== that.id);
+            } else {
+                if (!global.data.session.preAdd.find((elem) => elem.id === that.id)) {
+                    global.data.session.preAdd.push(this);
                 }
             }
-
-            if (sliderStore.data.activated !== '1') {
-                sliderStore.data.activated = '1';
-            }
+            console.log('带增加数组的长度', global.data.session.preAdd.length);
         })
     })
 }

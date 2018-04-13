@@ -22,7 +22,7 @@ const data = observable({
 const actions = {
     onChange: action(e => {
         data.filter = e.target.value;
-        data.input = data.input ? data.input : e.target
+        data.input = data.input ? data.input : e.target;
     }),
     clearFilter: action(() => {
         data.filter = '';
@@ -38,7 +38,7 @@ const actions = {
 };
 
 const verticalBarStyle = function ({style, ...props}) {
-    let thumbStyle = {backgroundColor: '#5F5F5F', width: 4, height: 56, right: -4};
+    const thumbStyle = {backgroundColor: '#5F5F5F', width: 4, height: 56, right: -4};
     return <div style={{...style, ...thumbStyle}} {...props} />;
 };
 

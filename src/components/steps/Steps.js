@@ -8,8 +8,8 @@ const Step = Steps.Step;
 const Procedure = observer(({store}) => {
         return (
             <div className='steps'>
-                <Steps current={store.data.current}>
-                    {store.data.steps.map((elem, index) => <Step title={elem} key={index}/>)}
+                <Steps current={store.current}>
+                    {store.steps.map((elem, index) => <Step title={elem} key={index}/>)}
                 </Steps>
             </div>
         );

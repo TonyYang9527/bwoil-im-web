@@ -8,11 +8,16 @@ const AsyncHome = Loadable({
     loading: Loading
 });
 
+const index = Loadable({
+    loader: () => import("../pages/Index/View"),
+    loading: Loading
+});
 
 export default () => (
     <HashRouter>
         <Switch>
             <Route exact path='/' component={AsyncHome}/>
+            <Route exact path='/index' component={index}/>
         </Switch>
     </HashRouter>
 )
