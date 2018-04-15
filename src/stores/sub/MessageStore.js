@@ -10,13 +10,13 @@ const msgActions = {
     loadConversations: action(()=>{
         console.log("msgStore.messages loadConversations : ", msgStore.messages) ;
        let msg = {
-            id: 100,
-            name: "Mike Gordon",
-            status: "online",
-            image: '',
-            message: "I miss you dear,call me please. i leave message to you.",
-            unread: 98,
-            time: "02:49"
+            'id': 100,
+            'name': "Mike Gordon",
+            'status': "online",
+            'image': '',
+            'message': "I miss you dear,call me please. i leave message to you.",
+            'unread': 98,
+            'time': "02:49"
         };
         msgStore.messages.set(100, msg );
     }),
