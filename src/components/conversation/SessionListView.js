@@ -1,16 +1,18 @@
 import React from 'react';
-import {inject ,observer} from 'mobx-react';
+import {observer} from 'mobx-react';
 import SessionView from './SessionView' ;
 import './Session.less';
 
-
-
 const SessionListView = observer(({store}) =>{
-     store.msgActions.loadConversations();
-     const SessionViews =store.msgActions.getAllData().map(message=> 
-         <SessionView  key={message.id} message ={message}  store={store} />
-    ) ;
-     return (<div> {SessionViews}</div>) ;
+    let sessionViews = [];
+    store.msgStore.messages.forEach((value, key, map) => {
+        if (value) {
+            sessionViews.push(
+              <SessionView key={key} id={key} store={store} />
+            ); 
+        }
+    });
+     return (<div> {sessionViews}</div>) ;
     }
  );
 export default SessionListView;
