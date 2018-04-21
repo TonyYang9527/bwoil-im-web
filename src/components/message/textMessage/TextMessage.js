@@ -2,9 +2,10 @@ import React from 'react';
 import {observer} from "mobx-react";
 import './TextMessage.less';
 
-const TextMessage = observer(({store}) => {
+const TextMessage = observer(({message}) => {
+        const textStyle = message.fromUser ? 'textMessage-fromUser' : 'textMessage-fromGuest';
         return (
-            <span className={store.textStyle}>{store.message}</span>
+            <span className={textStyle}>{message.message}</span>
         );
     }
 );

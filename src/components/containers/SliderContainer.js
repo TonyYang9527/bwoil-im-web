@@ -5,11 +5,11 @@ import TabsView from '../tabsView/TabsView';
 
 import './SliderContainer.less' ;
 
-const SliderContainer = observer(({store}) => {
+const SliderContainer = observer(() => {
     return (
         <div className="slider">
-            <Search store={store}/>
-            <TabsView store={store}/>
+            <Search/>
+            <TabsView/>
         </div>
     );
 });

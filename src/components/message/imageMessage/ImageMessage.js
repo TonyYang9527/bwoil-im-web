@@ -2,12 +2,12 @@ import React from 'react';
 import {observer} from "mobx-react";
 import './ImageMessage.less';
 
-const ImageMessage = observer(({store}) => {
+const ImageMessage = observer(({message}) => {
+        const imageStyle = message.fromUser ? 'imageMessage-fromUser' : 'imageMessage-fromGuest';
         return (
-            <a href={store.message} target='_blank' className='imageMessage-link'>
-                <img src={store.message} className={store.imageStyle} alt=''/>
+            <a href={message.message} target='_blank' className='imageMessage-link'>
+                <img src={message.message} className={imageStyle} alt=''/>
             </a>
-
         );
     }
 );

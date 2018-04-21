@@ -1,20 +1,33 @@
 import React from 'react';
+import {action, observable} from 'mobx';
 import {observer} from 'mobx-react';
 import {Modal} from 'antd';
 import './OfferConfirm.less';
 
-import offerStore from '../../../stores/OfferStore';
+const offerConfirmState = observable({
+    modalShow: false,
+    data: null
+});
 
-const OfferConfirm = observer(({store}) => {
+const offerConfirmActions = {
+    openModal: action(data => {
+        offerConfirmState.modalShow = true;
+        offerConfirmState.data = data;
+    }),
+    closeModal: action(() => {
+        offerConfirmState.modalShow = false;
+    })
+};
+
+const OfferConfirm = observer(({state, actions}) => {
         return (
             <Modal className='offer-confirm'
                    title="The offer has been confirmed!"
-                   visible={true}
+                   visible={state.modalShow}
                    closable={false}
-                   onOk={offerStore.close}
-                   onCancel={offerStore.close}
-                   okText="OK"
-            >
+                   onOk={actions.closeModal}
+                   onCancel={actions.closeModal}
+                   okText="OK">
                 <p>To view offer summary, you can always select the information icon at the top right of the conversation
                     screen.</p>
             </Modal>
@@ -22,4 +35,4 @@ const OfferConfirm = observer(({store}) => {
     }
 );
 
-export default OfferConfirm;
+export {OfferConfirm, offerConfirmState, offerConfirmActions};

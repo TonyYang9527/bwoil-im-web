@@ -7,28 +7,31 @@ import './TabsView.less';
 import Session from '../session/Session';
 import Contact from '../contact/Contact';
 
+import globalStore from '../../stores/GlobalStore';
+
 const TabPane = Tabs.TabPane;
 
-const TabsView = observer(({store}) => {
-        console.log('TabsView', store.data.sessions);
-        return <Tabs activeKey={store.data.activated} onChange={store.actions.onTabChange}>
-            <TabPane tab='Message' key='1'>
-                <Scrollbars style={{width: 250, height: 572}}
-                            renderThumbVertical={store.verticalBarStyle}
-                            renderThumbHorizontal={store.horizontalBarStyle}
-                            thumbSize ={ 56} >
-                    {store.data.sessions.map((elem, index) => <Session store={elem} key={index}/>)}
-                </Scrollbars>
-            </TabPane>
-            <TabPane tab='Contact' key='2'>
-                <Scrollbars style={{width: 250, height: 572}}
-                            renderThumbVertical={store.verticalBarStyle}
-                            renderThumbHorizontal={store.horizontalBarStyle}
-                            thumbSize ={ 56} >
-                    {store.data.contacts.map((elem, index) => <Contact store={elem} key={index}/>)}
-                </Scrollbars>
-            </TabPane>
-        </Tabs>
+const TabsView = observer(() => {
+        return (
+            <Tabs activeKey={globalStore.data.tabKey} onChange={globalStore.actions.changeTab}>
+                <TabPane tab='Message' key='1'>
+                    <Scrollbars style={{width: 250, height: 572}}
+                                renderThumbVertical={globalStore.verticalBarStyle}
+                                renderThumbHorizontal={globalStore.horizontalBarStyle}
+                                thumbSize={56}>
+                        {globalStore.data.filterSessions.map((elem, index) => <Session session={elem} key={index}/>)}
+                    </Scrollbars>
+                </TabPane>
+                <TabPane tab='Contact' key='2'>
+                    <Scrollbars style={{width: 250, height: 572}}
+                                renderThumbVertical={globalStore.verticalBarStyle}
+                                renderThumbHorizontal={globalStore.horizontalBarStyle}
+                                thumbSize={56}>
+                        {globalStore.data.filterContacts.map((elem, index) => <Contact contact={elem} key={index}/>)}
+                    </Scrollbars>
+                </TabPane>
+            </Tabs>
+        )
     }
 );
 

@@ -1,41 +1,60 @@
-import {extendObservable, action} from 'mobx';
+import {observable, action, autorun} from 'mobx';
 
-import SessionStore from './SessionStore';
-import global from './Global';
+import sessionStore from './SessionStore';
+import {contacts} from '../mock/Data';
 
-function ContactStore() {
-    extendObservable(this, {
-        id: 0,
-        image: '',
-        name: '',
-        chooseContact: action.bound(function () {
-            let session = global.data.sessions.find((elem) =>
-                elem.partner.length === 1 && elem.partner[0].id === this.id
-            );
-            console.log('chooseContact', session);
+const data = observable({
+    contacts: observable.map()
+});
 
-            if (session) {
-                session.chooseSession();
+const actions = {
+    init: action((contacts) => {
+        contacts.forEach((elem) => {
+            data.contacts.set(elem.id, elem);
+        });
+    }),
+    add: action((contact) => {
+        if (!data.contacts.has(contact.id)) {
+            data.contacts.set(contact.id, contact);
+        }
+    }),
+    rename: action((id, name) => {
+        if (data.contacts.has(id)) {
+            data.contacts.get(id).name = name;
+        }
+    }),
+    delete: action((id) => {
+        if (data.contacts.has(id)) {
+            data.contacts.delete(id);
+        }
+    }),
+    select: action((id) => {
+        if (data.contacts.has(id)) {
+            if (!sessionStore.state.sessions.has(id)) {
+                let temp = data.contacts.get(id);
+                let session = {
+                    id: temp.id,
+                    name: temp.name,
+                    status: temp.status,
+                    image: temp.image,
+                    message: '',
+                    unread: 0,
+                    time: '',
+                    partners: [id]
+                };
+                sessionStore.actions.add(session);
+                sessionStore.actions.select(session.id);
             } else {
-                session = new SessionStore();
-                session.partner.push(this);
-                session.chooseSession();
-                global.data.sessions.push(session);
+                sessionStore.actions.select(id);
             }
-            global.data.activated = '1';
-        }),
-        addContactToSession: action.bound(function (e) {
-            let that = this;
-            if (!e.target.checked) {
-                global.data.session.preAdd = global.data.session.preAdd.filter((elem) => elem.id !== that.id);
-            } else {
-                if (!global.data.session.preAdd.find((elem) => elem.id === that.id)) {
-                    global.data.session.preAdd.push(this);
-                }
-            }
-            console.log('带增加数组的长度', global.data.session.preAdd.length);
-        })
+        }
     })
-}
+};
 
-export default ContactStore;
+autorun(() => {
+    if (!data.contacts.size) {
+        actions.init(contacts);
+    }
+});
+
+export default {data, actions};

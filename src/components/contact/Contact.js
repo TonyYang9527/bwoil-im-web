@@ -3,17 +3,18 @@ import {observer} from 'mobx-react';
 import {Avatar} from 'antd';
 import './Contact.less';
 
-const Contact = observer(({store}) => {
-        console.log('contact', store);
+import contactStore from '../../stores/ContactStore';
+
+const Contact = observer(({contact}) => {
         return (
-            <div className='contact' onClick={store.chooseContact}>
+            <div className='contact' onClick={() => contactStore.actions.select(contact.id)}>
                 <div className='contact-icon'>
-                    <Avatar src={store.image}/>
+                    <Avatar src={contact.image}/>
                     <div className='contact-point'/>
                 </div>
-                <span className='contact-name'>{store.name}</span>
+                <span className='contact-name'>{contact.name}</span>
             </div>
-        )
+        );
     }
 );
 

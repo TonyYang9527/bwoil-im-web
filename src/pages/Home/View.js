@@ -5,16 +5,15 @@ import {Laytout} from '../../components/layout/Laytout';
 import {ProfileContainer} from '../../components/containers/ProfileContainer';
 import {ContentContainer} from '../../components/containers/ContentContainer';
 import {SliderContainer} from '../../components/containers/SliderContainer';
-import globalStore from '../../stores/Global';
-
+import AddContact from '../../components/addContact/AddContact';
 
 const HomePage = observer(() => {
     return (
         <Laytout>
-            <SliderContainer store={globalStore}/>
-            <ContentContainer store={globalStore}/>
-            <ProfileContainer store={globalStore}/>
-            {globalStore.data.session.popWindow}
+            <SliderContainer/>
+            <ContentContainer/>
+            <ProfileContainer/>
+            <AddContact/>
         </Laytout>
     );
 });

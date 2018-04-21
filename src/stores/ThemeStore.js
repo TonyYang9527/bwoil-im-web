@@ -17,4 +17,4 @@ const settingTheme = action((width, height, left, top, background) => {
     console.log(JSON.stringify(theme));
 });
 
-export {theme, settingTheme}
+export {theme, settingTheme};

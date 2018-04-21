@@ -1,36 +1,27 @@
 import React from 'react';
 import {observer} from 'mobx-react';
-import {Modal, Select} from 'antd';
+import {Modal, Select, Button} from 'antd';
 import './ValidityPeriod.less';
-
-import offerStore from '../../../stores/OfferStore';
 
 const Option = Select.Option;
 
 const ValidityPeriod = observer(({store}) => {
-        const changeAgree = function (e) {
-            console.log(e.target.tagName);
-            if (e.target.tagName === 'BUTTON') {
-                store.goToModify();
-            } else {
-                offerStore.close();
-            }
-        };
+        let {state, actions} = store;
         return (
-            <Modal className={store.getCounter ? 'validity-period-counter' : 'validity-period'}
-                   title='The offer has been confirmed!'
-                   visible={true}
-                   onOk={offerStore.close}
-                   onCancel={changeAgree}
-                   okText={store.getCounter ? 'Agree' : 'Send Onsub'}
-                   cancelText='Counter'
-            >
-                <p>Validity Period</p>
-                <Select placeholder='Select Validity Period' style={{width: 272}} disabled={store.getCounter}>
+            <Modal className={state.status ? 'extend-validity-period' : 'validity-period'}
+                   title={state.status ? 'Validity Period' : 'Extend On Sub Validity Period'}
+                   visible={state.modalShow}
+                   onCancel={actions.closeModal}>
+                <p>Number of day to extend</p>
+                <Select placeholder='Select Validity Period' style={{width: 272}}>
                     <Option value='jack'>Jack</Option>
                     <Option value='lucy'>Lucy</Option>
-                    <Option value='Yiminghe'>yiminghe</Option>
+                    <Option value='yiminghe'>Yiminghe</Option>
                 </Select>
+                <div className='validity-period-buttons'>
+                    {state.status ? <Button onClick={actions.changeModal}>Counter</Button> : null}
+                    <Button type='primary'>{state.status ? 'Agree' : 'Extend'}</Button>
+                </div>
             </Modal>
         );
     }

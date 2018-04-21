@@ -3,18 +3,15 @@ import {observer} from "mobx-react";
 import {Modal} from 'antd';
 import './ContactWay.less';
 
-import offerStore from "../../../stores/OfferStore";
-
 const ContactWay = observer(({store}) => {
+        let {state, actions} = store;
         return (
             <Modal className='contact-way'
-                title="Please contact MO for more services"
-                visible={true}
-                closable={false}
-                onOk={offerStore.close}
-                onCancel={offerStore.close}
-                okText="OK"
-            >
+                   title="Please contact MO for more services"
+                   visible={state.modalShow}
+                   closable={false}
+                   onOk={actions.closeModal}
+                   okText="OK">
                 <div>
                     <span>CP services</span>
                     <span>

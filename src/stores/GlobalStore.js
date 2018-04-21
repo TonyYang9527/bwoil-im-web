@@ -1,49 +1,52 @@
-import {observable, when} from 'mobx';
+import React from 'react';
+import {observable, action} from 'mobx';
 
-import {sessions} from "../mock/DataStore";
-import {messages} from '../mock/DataStore';
-import {profiles} from "../mock/DataStore";
-
-import ContactStore from "./ContactStore";
-import MessageStore from "./MessageStore";
+import sessionStore from './SessionStore';
+import contactStore from './ContactStore';
 
 const data = observable({
-    contact_list: [],
-    session_list: [],
-    contact: null
+    filter: '',
+    tabKey: '1',
+    get filterSessions() {
+        let that = this;
+        return that.filter && that.tabKey === '1' ?
+            sessionStore.state.sessions.values()
+                .filter((elem) => elem.name.toLowerCase().indexOf(that.filter.toLowerCase()) !== -1)
+            : sessionStore.state.sessions.values();
+    },
+    get filterContacts() {
+        let that = this;
+        return that.filter && that.tabKey === '2' ?
+            contactStore.data.contacts.values()
+                .filter((elem) => elem.name.toLowerCase().indexOf(that.filter.toLowerCase()) !== -1)
+            : contactStore.data.contacts.values();
+    }
 });
 
-when(() => !data.contact,
-    () => {
-        console.log('初始化一次');
-        data.contact_list = sessions.map(function (elem, index) {
-            let temp = new ContactStore();
-            temp.id = elem.id;
-            temp.image = elem.image;
-            temp.name = elem.name;
-            temp.unread = elem.unread;
-            temp.time = elem.time;
-            if (index % 2 === 0) {
-                temp.messages = messages.map(elem => {
-                    let temp = new MessageStore();
-                    temp.avatar = elem.avatar;
-                    temp.type = elem.type;
-                    temp.message = elem.message;
-                    temp.status = elem.status;
-                    temp.time = elem.time;
-                    temp.fromUser = elem.fromUser;
-                    return temp;
-                });
-            } else {
-                temp.messages = [];
-            }
-            temp.profiles = profiles;
-            return temp;
-        });
-        data.session_list = data.contact_list.filter(function (elem) {
-            return elem.messages.length > 0;
-        });
-    }
-);
+const actions = {
+    clearFilter: action(() => {
+        data.filter = '';
+    }),
+    changeFilter: action(e => {
+        data.filter = e.target.value;
+    }),
+    changeTab: action(key => {
+        data.tabKey = key;
+        data.filter = '';
+    }),
+    restoreTab: action(() => {
+        data.tabKey = '1';
+    })
+};
 
-export default {data}
+const verticalBarStyle = function ({style, ...props}) {
+    const thumbStyle = {backgroundColor: '#5F5F5F', width: 4, right: -4};
+    return <div style={{...style, ...thumbStyle}} {...props} />;
+};
+
+const horizontalBarStyle = function ({style, ...props}) {
+    const thumbStyle = {visibility: 'hidden'};
+    return (<div style={{...style, ...thumbStyle}} {...props} />);
+};
+
+export default {data, actions, verticalBarStyle, horizontalBarStyle}
