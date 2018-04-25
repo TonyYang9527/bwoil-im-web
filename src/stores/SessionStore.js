@@ -12,17 +12,25 @@ import {sessions} from '../mock/Data';
 
 const state = observable({
     sessions: observable.map(),
-    selected: {}  //selected session
+    selected: {},  //selected session
+      model :{
+             covsid :"" ,
+             key :"",
+             visible:false ,
+             title:"" ,
+             okText:"" ,
+        }
 });
 
 const actions = {
     init: action((sessions) => {
         sessions.forEach((item) => {
-            state.sessions.set(item.id, item);
+            state.sessions.set(item.id, { ...item, className:'session'});
         });
     }),
 
     select: action((id) => {
+        console.log("select") ;
         if (state.sessions.has(id)) {
             state.selected = state.sessions.get(id);
             state.selected.unread = 0;
