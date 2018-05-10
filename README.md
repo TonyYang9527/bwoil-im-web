@@ -24,69 +24,43 @@ https://javascriptplayground.com/functional-stateless-components-react/
 
 
 
+const Member = observer(() => { 
+     return ( 
+          <div class="member">
+             <img class="avatar" src="https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png"  />
+             <p class="nickname ng-binding" title="魏定海13772174144"  >魏定海13772174144</p>
+          </div>);
+});
+
+/****************/
+.member {
+    float: left;
+    position: relative;
+    height: 85px;
+    margin-right: 7px;
+    margin-left: 7px;
+    padding-top: 10px;
+        text-align: center;
+        line-height: 30px;
+}
 
 
+.member .avatar {
+    display: block;
+    cursor: pointer;
+    width: 55px;
+    height: 55px;
+    background-color: #ccc;
+}
 
- Message  List
-	
-param: 	userId,covsId
-	
-result	[{
-	    covsId: xxxx
-        msgId:   xxxx,
-        msgType: 'xxxx',
-        msgContent: xxxx,
-        msgStatus: xxxx,
-        senderTime: xxxx,
-		
-	    sender:{
-          senderId: 12223,
-          senderName: 'John',
-          senderIcon: process.env.PUBLIC_URL.concat("/assets/icon/user/flash.png")
-		}
-      }]
-	
-----------------------------	
- 
-	ADD  Message  [
-	      {
-            'id': msgId,
-            'uri': 'im/message/add',
-            'body': {
-                "msgItems":[{
-                        "covsId": convsId,
-						"msgType" : 1
-                        "msgContent": msg,
-                        "senderId": userId
-                    }]
-            }
-        }
-		];
-	 
-	----------------------------	 
-
- conversation  List
-	params : userId
-	
-	 conversation  :
-	  [{
-	  covsId :
-	  covsName :
-	  covsIcon :
-	  covsStatus :
-	  createTime :
-	  createBy :
-	  unreadMsg :[]
-	  newMsg :{}
-	  memberIds :[] 	  
-	  }]
----------------------	  
-	Add	conversation  
-	  Add 
-	  {
-	   userIds: userIds ,
-	   createBy: userId,
-	  };
-	 
-	 
-	 
+.member .nickname {
+    color: #888;
+    width: 72px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    word-wrap: normal;
+    font-size: 12px;
+    margin-left: -8px;
+    vertical-align: middle;
+}
