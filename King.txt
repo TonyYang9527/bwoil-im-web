@@ -1,0 +1,41 @@
+const Member = observer(() => { 
+    return ( 
+         <div class="member">
+            <img class="avatar" src="https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png"  />
+            <p class="nickname ng-binding" title="魏定海13772174144"  >魏定海13772174144</p>
+         </div>);
+});
+
+
+/****************/
+.member {
+    float: left;
+    position: relative;
+    height: 85px;
+    margin-right: 7px;
+    margin-left: 7px;
+    padding-top: 10px;
+        text-align: center;
+        line-height: 30px;
+}
+
+
+.member .avatar {
+    display: block;
+    cursor: pointer;
+    width: 55px;
+    height: 55px;
+    background-color: #ccc;
+}
+
+.member .nickname {
+    color: #888;
+    width: 72px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    word-wrap: normal;
+    font-size: 12px;
+    margin-left: -8px;
+    vertical-align: middle;
+}
