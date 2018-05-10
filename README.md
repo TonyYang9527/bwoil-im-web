@@ -27,7 +27,7 @@ https://javascriptplayground.com/functional-stateless-components-react/
 const Member = observer(() => { 
      return ( 
           <div class="member">
-             <img class="avatar" src="https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png"  />
+             <img class="avatar" src=" https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png "/>
              <p class="nickname ng-binding" title="魏定海13772174144"  >魏定海13772174144</p>
           </div>);
 });
