@@ -7,6 +7,20 @@ const Member = observer(() => {
 });
 
 
+const MemberRow = observer(() => {
+    return (
+        <Row gutter={16}>
+            <Col span={4}><Member /></Col>
+            <Col span={4}><Member /></Col>
+            <Col span={4}><Member /></Col>
+            <Col span={4}><Member /></Col>
+            <Col span={4}><Member /></Col>
+            <Col span={4}><Member /></Col>
+        </Row>) ;
+});
+
+
+
 /****************/
 .member {
     float: left;
